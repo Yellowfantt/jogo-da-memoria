@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desafio 1 - Memory Challenge</title>
+  <link rel="icon" href="../assets/imagens/login1.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/desafio1.css" />
+</head>
+<body>
+  <div class="bg-elements">
+    <div class="pixel-grid"></div>
+    <div class="neon-circle"></div>
+    <div class="neon-circle"></div>
+  </div>
+
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="home-btn">
+        <img src="../assets/imagens/home-button.png" alt="Home" class="header-icon">
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="header-item">
+        <img src="../assets/imagens/single-player.png" alt="Player" class="header-icon">
+        <strong>Jogador:</strong> <span id="playerName">Player</span>
+      </div>
+      <div class="header-item">
+        <img src="../assets/imagens/clock.png" alt="Tempo" class="header-icon">
+        <strong>Tempo:</strong> <span id="time">00:00</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="question-box">
+      <h2 class="title">DESAFIO LÓGICO NÍVEL 1</h2>
+      <p style="margin-bottom: 25px; color: #ccc; font-size: 16px;">Responda com <strong>true</strong> ou <strong>false</strong> as expressões abaixo</p>
+
+      <div class="questions-grid">
+        <div class="question-item">
+          <div class="question-text">1 > 2</div>
+          <input type="text" class="question-input" id="q1" placeholder="true/false" />
+        </div>
+        <div class="question-item">
+          <div class="question-text">3 != 3</div>
+          <input type="text" class="question-input" id="q2" placeholder="true/false" />
+        </div>
+        <div class="question-item">
+          <div class="question-text">100 < 200</div>
+          <input type="text" class="question-input" id="q3" placeholder="true/false" />
+        </div>
+        <div class="question-item">
+          <div class="question-text">10 == 5</div>
+          <input type="text" class="question-input" id="q4" placeholder="true/false" />
+        </div>
+      </div>
+
+      <button class="continue-btn" onclick="verificarRespostas()">Continuar</button>
+      <div id="feedback"></div>
+    </section>
+  </main>
+  <script type="module" src="/js/controllers/desafio1Controller.js"></script>
+
+</body>
+</html>

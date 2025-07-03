@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game - Enhanced</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <link rel="icon" href="../assets/imagens/login1.png" type="image/x-icon">
+    <script defer type="module" src="../js/controllers/gameController.js"></script>
+    <script src="../js/models/levels.js"></script>
+<script src="../js/controllers/gameController.js"></script>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="sound-toggle" id="soundToggle">
+        🔊
+    </div>
+
+    <main>
+        <h1 class="game-title">MEMORY CHALLENGE</h1>
+        
+        <header>
+            <div class="stat-item">
+                <span class="stat-label">Jogador</span>
+                <span class="stat-value player"></span>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Tempo</span>
+                    <span class="stat-value timer">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Jogadas</span>
+                    <span class="stat-value moves">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- Cards serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </main>
+
+    <div class="modal" id="winModal">
+        <div class="modal-content">
+            <h2>🎉 Parabéns!</h2>
+            <p id="winMessage"></p>
+            <button class="btn" id="playAgainBtn">Iniciar Desafio</button>
+        </div>
+    </div>
+</body>
+</html>

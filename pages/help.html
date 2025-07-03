@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help - Guia do Jogo</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/help.css">
+  <link rel="icon" href="../assets/imagens/login1.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Animated particles -->
+  <div class="particles" id="particles"></div>
+
+  <header class="help-header">
+    <h1>Guia do Jogo</h1>
+    <div class="progress-indicator">
+      <span id="current-slide">1</span> / <span id="total-slides">7</span>
+    </div>
+  </header>
+  
+  <main class="carousel-container">
+    <div class="carousel-wrapper">
+      <div class="image-container">
+        <img id="carousel-image" src="https://via.placeholder.com/800x500/1a1a2e/00bcd4?text=Imagem+1" alt="Ajuda do Jogo" loading="lazy">
+        <div class="loading-overlay" id="loading-overlay">
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="carousel-controls">
+      <button id="prev-btn" aria-label="Imagem anterior">◀ Anterior</button>
+      <button id="next-btn" aria-label="Próxima imagem">Próximo ▶</button>
+    </div>
+    
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </main>
+
+  <!-- Modal para visualização ampliada -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <img id="modal-img" class="modal-image" src="" alt="Visualização ampliada">
+    </div>
+  </div>
+
+  <script type="module" src="../js/controllers/helpController.js"></script>
+</body>
+</html>

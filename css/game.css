@@ -1,0 +1,479 @@
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Arial', sans-serif;
+    background-image: url(../assets/imagens/gameback3.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Fixa a imagem para evitar movimento */
+    overflow: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: float 6s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.game-title {
+    font-size: 2.5rem; /* Reduzido para telas menores */
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+    to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Reduzido para melhor adaptação */
+    margin-bottom: 30px;
+    padding: 20px 30px; /* Reduzido */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.1rem; /* Reduzido */
+    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.stats {
+    display: flex;
+    gap: 25px; /* Reduzido */
+    align-items: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    font-size: 0.85rem; /* Reduzido */
+    opacity: 0.8;
+}
+
+.stat-value {
+    font-size: 1.2rem; /* Reduzido */
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.sound-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.sound-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.grid {
+    display: grid;
+    width: 100%;
+    max-width: 600px; /* Reduzido para melhor adaptação */
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px; /* Reduzido */
+    padding: 10px;
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 400ms ease-in-out;
+    transform-style: preserve-3d;
+}
+
+/* CORREÇÃO: Hover só funciona quando a carta não está revelada nem desabilitada */
+.card:not(.reveal-card):not(.disabled-card):hover {
+    transform: translateY(-3px) scale(1.02); /* Reduzido para ser mais sutil */
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.3));
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 400ms ease-in-out;
+    border-radius: 8px;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-position: center;
+    transform: rotateY(180deg);
+}
+
+.back {
+    background-image: url(../assets/imagens/BACK1.png);
+    transform: rotateY(0deg);
+}
+
+.reveal-card {
+    transform: rotateY(180deg);
+}
+
+/* CORREÇÃO: Animação mais suave para cartas encontradas */
+.disabled-card {
+    filter: saturate(0.3) brightness(0.7);
+    opacity: 0.8;
+    animation: matchFound 0.6s ease-out;
+    pointer-events: none; /* Impede interação com cartas pareadas */
+}
+
+/* CORREÇÃO: Garante que cartas desabilitadas mantenham a rotação da carta revelada */
+.disabled-card.reveal-card {
+    transform: rotateY(180deg) !important;
+}
+
+@keyframes matchFound {
+    0% { 
+        transform: scale(1); 
+        filter: saturate(0.3) brightness(0.7);
+    }
+    50% { 
+        transform: scale(1.1); 
+        filter: saturate(1) brightness(1.2);
+    }
+    100% { 
+        transform: scale(1); 
+        filter: saturate(0.3) brightness(0.7);
+    }
+}
+
+/* REMOVIDA: Seção .controls que continha os botões de pausar e reiniciar */
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalAppear 0.5s ease-out;
+    max-width: 90%;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal h2 {
+    font-size: 2.2rem; /* Reduzido */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal p {
+    font-size: 1.1rem; /* Reduzido */
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Responsividade aprimorada para notebooks e telas menores */
+@media (max-width: 1366px) {
+    body {
+        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
+    }
+    
+    .game-title {
+        font-size: 2.2rem;
+    }
+    
+    .grid {
+        max-width: 550px;
+        gap: 10px;
+    }
+    
+    header {
+        max-width: 550px;
+        padding: 18px 25px;
+    }
+}
+
+@media (max-width: 1280px) {
+    body {
+        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
+    }
+    
+    .game-title {
+        font-size: 2.2rem;
+    }
+    
+    .grid {
+        max-width: 550px;
+        gap: 10px;
+    }
+    
+    header {
+        max-width: 550px;
+        padding: 18px 25px;
+    }
+}
+
+
+
+@media (max-width: 1024px) {
+    body {
+        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
+    }
+    
+    
+    .game-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    header {
+        max-width: 500px;
+        padding: 16px 22px;
+        font-size: 1rem;
+    }
+    
+    .stats {
+        gap: 20px;
+    }
+    
+    .stat-value {
+        font-size: 1.1rem;
+    }
+    
+    .grid {
+        max-width: 500px;
+        gap: 10px;
+    }
+    
+    .sound-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px 20px;
+        max-width: 90%;
+    }
+    
+    .stats {
+        gap: 20px;
+    }
+    
+    .stat-item {
+        gap: 3px;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        max-width: 90%;
+    }
+    
+    .sound-toggle {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+        font-size: 1rem;
+    }
+    
+    .modal h2 {
+        font-size: 1.8rem;
+    }
+    
+    .modal p {
+        font-size: 1rem;
+    }
+    
+    .modal-content {
+        padding: 25px 20px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 1.5rem;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        max-width: 95%;
+    }
+    
+    .stats {
+        gap: 15px;
+    }
+    
+    .card {
+        aspect-ratio: 2.5/3.5;
+    }
+}
+
+@media (max-width: 360px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .card {
+        aspect-ratio: 2/3;
+    }
+}

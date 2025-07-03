@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração de Desafios</title>
+    <link rel="stylesheet" href="../css/config.css" />
+    <link rel="icon" href="../assets/imagens/login1.png" type="image/x-icon">
+    <script defer type="module" src="../js/controllers/configController.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="config_container">
+        <form class="config_form">
+            <h1 class="config_title">Configuração de Desafios</h1>
+
+            <div class="form_group">
+                <label class="form_label">
+                    Nível do desafio
+                    <span class="level_badge" id="level_badge">Nível 2</span>
+                </label>
+                <select id="level_select" class="config_select">
+                    <option value="2">Nível 2 - Intermediário</option>
+                    <option value="3">Nível 3 - Avançado</option>
+                </select>
+            </div>
+
+            <div class="form_group">
+                <label class="form_label">Código do desafio</label>
+                <textarea id="code_input" class="config_textarea" rows="6"
+                    placeholder='if 5 > 3:&#10;    print("Maior")&#10;else:&#10;    print("Menor")'></textarea>
+            </div>
+
+            <div class="form_group">
+                <label class="form_label">Resposta esperada</label>
+                <input id="answer_input" class="config_input" type="text" placeholder="Maior" />
+            </div>
+
+            <button type="submit" class="config_button">
+                💾 Salvar Configuração
+            </button>
+
+            <div class="config_hint">
+                <span class="hint_icon">💡</span>
+                <span>
+                    O código será mostrado ao jogador, que deverá digitar a resposta correta.
+                    Certifique-se de que a resposta esperada está exatamente como o código irá produzir.
+                </span>
+            </div>
+        </form>
+    </div>
+
+    
+</body>

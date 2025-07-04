@@ -1,15 +1,36 @@
+/* -------------------------- BASE -------------------------- */
 body {
     min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+/* Imagem de fundo estática */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url(../assets/imagens/gameback3.png) center top / cover no-repeat;
+    z-index: 0;
+    pointer-events: none;
+    background-attachment: scroll;
+}
+
+/* Gradiente animado por cima da imagem */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
-    font-family: 'Arial', sans-serif;
-    background-image: url(../assets/imagens/gameback3.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Fixa a imagem para evitar movimento */
-    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
 }
 
 @keyframes gradientShift {
@@ -18,6 +39,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* -------------------------- PARTÍCULAS -------------------------- */
 .particles {
     position: fixed;
     top: 0;
@@ -42,18 +64,15 @@ body {
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
     }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
     100% {
         transform: translateY(-100px) rotate(360deg);
         opacity: 0;
     }
 }
 
+/* -------------------------- ESTRUTURA -------------------------- */
 main {
     display: flex;
     flex-direction: column;
@@ -66,8 +85,9 @@ main {
     z-index: 2;
 }
 
+/* -------------------------- TÍTULO -------------------------- */
 .game-title {
-    font-size: 2.5rem; /* Reduzido para telas menores */
+    font-size: 2.5rem;
     font-weight: bold;
     color: #fff;
     text-align: center;
@@ -81,19 +101,20 @@ main {
     to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
 }
 
+/* -------------------------- HEADER -------------------------- */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 600px; /* Reduzido para melhor adaptação */
+    max-width: 600px;
     margin-bottom: 30px;
-    padding: 20px 30px; /* Reduzido */
+    padding: 20px 30px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
-    font-size: 1.1rem; /* Reduzido */
+    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -107,7 +128,7 @@ header:hover {
 
 .stats {
     display: flex;
-    gap: 25px; /* Reduzido */
+    gap: 25px;
     align-items: center;
 }
 
@@ -119,16 +140,17 @@ header:hover {
 }
 
 .stat-label {
-    font-size: 0.85rem; /* Reduzido */
+    font-size: 0.85rem;
     opacity: 0.8;
 }
 
 .stat-value {
-    font-size: 1.2rem; /* Reduzido */
+    font-size: 1.2rem;
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+/* -------------------------- TOGGLE SOM -------------------------- */
 .sound-toggle {
     position: fixed;
     top: 20px;
@@ -154,13 +176,14 @@ header:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* -------------------------- GRID -------------------------- */
 .grid {
     display: grid;
     width: 100%;
-    max-width: 600px; /* Reduzido para melhor adaptação */
+    max-width: 600px;
     margin: 0 auto;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px; /* Reduzido */
+    gap: 12px;
     padding: 10px;
     perspective: 1000px;
 }
@@ -175,9 +198,8 @@ header:hover {
     transform-style: preserve-3d;
 }
 
-/* CORREÇÃO: Hover só funciona quando a carta não está revelada nem desabilitada */
 .card:not(.reveal-card):not(.disabled-card):hover {
-    transform: translateY(-3px) scale(1.02); /* Reduzido para ser mais sutil */
+    transform: translateY(-3px) scale(1.02);
     filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.3));
 }
 
@@ -194,7 +216,6 @@ header:hover {
 }
 
 .front {
-    background-position: center;
     transform: rotateY(180deg);
 }
 
@@ -207,36 +228,24 @@ header:hover {
     transform: rotateY(180deg);
 }
 
-/* CORREÇÃO: Animação mais suave para cartas encontradas */
 .disabled-card {
     filter: saturate(0.3) brightness(0.7);
     opacity: 0.8;
     animation: matchFound 0.6s ease-out;
-    pointer-events: none; /* Impede interação com cartas pareadas */
+    pointer-events: none;
 }
 
-/* CORREÇÃO: Garante que cartas desabilitadas mantenham a rotação da carta revelada */
 .disabled-card.reveal-card {
     transform: rotateY(180deg) !important;
 }
 
 @keyframes matchFound {
-    0% { 
-        transform: scale(1); 
-        filter: saturate(0.3) brightness(0.7);
-    }
-    50% { 
-        transform: scale(1.1); 
-        filter: saturate(1) brightness(1.2);
-    }
-    100% { 
-        transform: scale(1); 
-        filter: saturate(0.3) brightness(0.7);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); filter: saturate(1) brightness(1.2); }
+    100% { transform: scale(1); }
 }
 
-/* REMOVIDA: Seção .controls que continha os botões de pausar e reiniciar */
-
+/* -------------------------- BOTÕES -------------------------- */
 .btn {
     padding: 12px 24px;
     border: none;
@@ -260,12 +269,11 @@ header:hover {
     transform: translateY(-1px);
 }
 
+/* -------------------------- MODAL -------------------------- */
 .modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     display: none;
@@ -297,104 +305,28 @@ header:hover {
 }
 
 .modal h2 {
-    font-size: 2.2rem; /* Reduzido */
+    font-size: 2.2rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .modal p {
-    font-size: 1.1rem; /* Reduzido */
+    font-size: 1.1rem;
     margin-bottom: 30px;
-    opacity: 0.9;
     line-height: 1.5;
+    opacity: 0.9;
 }
 
-/* Responsividade aprimorada para notebooks e telas menores */
-@media (max-width: 1366px) {
+/* -------------------------- RESPONSIVO -------------------------- */
+@media (max-width: 1366px), (max-width: 1280px), (max-width: 1024px) {
     body {
-        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
-    }
-    
-    .game-title {
-        font-size: 2.2rem;
-    }
-    
-    .grid {
-        max-width: 550px;
-        gap: 10px;
-    }
-    
-    header {
-        max-width: 550px;
-        padding: 18px 25px;
-    }
-}
-
-@media (max-width: 1280px) {
-    body {
-        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
-    }
-    
-    .game-title {
-        font-size: 2.2rem;
-    }
-    
-    .grid {
-        max-width: 550px;
-        gap: 10px;
-    }
-    
-    header {
-        max-width: 550px;
-        padding: 18px 25px;
-    }
-}
-
-
-
-@media (max-width: 1024px) {
-    body {
-        background-attachment: scroll; /* Remove o fixed em telas menores para evitar movimento */
-    }
-    
-    
-    .game-title {
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-    
-    header {
-        max-width: 500px;
-        padding: 16px 22px;
-        font-size: 1rem;
-    }
-    
-    .stats {
-        gap: 20px;
-    }
-    
-    .stat-value {
-        font-size: 1.1rem;
-    }
-    
-    .grid {
-        max-width: 500px;
-        gap: 10px;
-    }
-    
-    .sound-toggle {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
+        background-attachment: scroll;
+        background-position: center top;
+        background-size: cover;
     }
 }
 
 @media (max-width: 768px) {
-    .game-title {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-    
+    .game-title { font-size: 1.8rem; margin-bottom: 15px; }
     header {
         flex-direction: column;
         gap: 15px;
@@ -402,78 +334,62 @@ header:hover {
         padding: 15px 20px;
         max-width: 90%;
     }
-    
-    .stats {
-        gap: 20px;
-    }
-    
-    .stat-item {
-        gap: 3px;
-    }
-    
-    .stat-label {
-        font-size: 0.8rem;
-    }
-    
-    .stat-value {
-        font-size: 1rem;
-    }
-    
+    .stats { gap: 20px; }
+    .stat-item { gap: 3px; }
+    .stat-label { font-size: 0.8rem; }
+    .stat-value { font-size: 1rem; }
     .grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
-        max-width: 90%;
-    }
-    
-    .sound-toggle {
-        width: 40px;
-        height: 40px;
-        top: 15px;
-        right: 15px;
-        font-size: 1rem;
-    }
-    
-    .modal h2 {
-        font-size: 1.8rem;
-    }
-    
-    .modal p {
-        font-size: 1rem;
-    }
-    
-    .modal-content {
-        padding: 25px 20px;
-        margin: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .game-title {
-        font-size: 1.5rem;
-    }
-    
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
         max-width: 95%;
     }
-    
-    .stats {
-        gap: 15px;
-    }
-    
-    .card {
-        aspect-ratio: 2.5/3.5;
+    .sound-toggle {
+        width: 40px; height: 40px;
+        top: 15px; right: 15px;
+        font-size: 1rem;
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 414px) {
     .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        grid-template-columns: repeat(3, 100px);
+        gap: 20px;
+        padding: 0 10px;
+        max-width: 100%;
     }
-    
     .card {
         aspect-ratio: 2/3;
     }
+    .game-title {
+        font-size: 1.4rem;
+    }
+    header {
+        padding: 12px 15px;
+        max-width: 95%;
+        font-size: 0.95rem;
+    }
+    .modal h2 { font-size: 1.5rem; }
+    .modal p { font-size: 1rem; }
+}
+
+@media (max-width: 375px) {
+    .grid {
+        grid-template-columns: repeat(3, 100px);
+        gap: 10px;
+        padding: 0 10px;
+        max-width: 100%;
+    }
+    .card {
+        aspect-ratio: 2/3;
+    }
+    .game-title {
+        font-size: 1.4rem;
+    }
+    header {
+        padding: 12px 15px;
+        max-width: 95%;
+        font-size: 0.95rem;
+    }
+    .modal h2 { font-size: 1.5rem; }
+    .modal p { font-size: 1rem; }
 }

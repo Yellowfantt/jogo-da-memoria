@@ -142,9 +142,9 @@ body {
     width: 100%;
     max-width: 700px;
     box-shadow:
-        0 0 50px rgba(0, 255, 255, 0.3),
-        0 0 100px rgba(255, 0, 255, 0.2),
-        inset 0 0 50px rgba(255, 255, 255, 0.05);
+    0 0 20px rgba(0, 255, 255, 0.1),
+    0 0 40px rgba(255, 0, 255, 0.05),
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
     border: 2px solid rgba(0, 255, 255, 0.3);
     text-align: center;
     position: relative;
@@ -152,27 +152,29 @@ body {
 }
 
 .question-box::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
-    border-radius: 20px;
-    z-index: -1;
-    animation: borderGlow 3s linear infinite;
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+  border-radius: 20px;
+  z-index: -1;
+  animation: borderGlow 3s linear infinite;
 }
 
 @keyframes borderGlow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
 
-    0%,
-    100% {
-        opacity: 0.5;
+@keyframes textGlow {
+    from {
+        filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.4));
     }
-
-    50% {
-        opacity: 1;
+    to {
+        filter: drop-shadow(0 0 6px rgba(255, 0, 255, 0.3));
     }
 }
 
@@ -181,22 +183,11 @@ body {
     font-weight: 900;
     margin-bottom: 30px;
     color: #fff;
-    text-shadow: 0 0 20px #00ffff;
     background: linear-gradient(45deg, #00ffff, #ff00ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: textGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes textGlow {
-    from {
-        filter: drop-shadow(0 0 10px #00ffff);
-    }
-
-    to {
-        filter: drop-shadow(0 0 20px #ff00ff);
-    }
 }
 
 .questions-grid {
@@ -270,50 +261,65 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.continue-btn {
-    background: linear-gradient(45deg, #00ffff, #0080ff);
-    border: none;
-    padding: 15px 40px;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Orbitron', monospace;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    overflow: hidden;
-}
+ .continue-btn {
+      background: linear-gradient(45deg, #4a90e2, #5cb3cc);
+      border: none;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: 'Orbitron', monospace;
+      color: #ffffff;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
 
-.continue-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-    transition: all 0.3s ease;
-    transform: translate(-50%, -50%);
-}
+    .continue-btn:disabled {
+      background: linear-gradient(45deg, #666, #777);
+      cursor: not-allowed;
+      opacity: 0.5;
+      box-shadow: none;
+    }
 
-.continue-btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
+    .continue-btn:disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
 
-.continue-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
-    background: linear-gradient(45deg, #ff00ff, #00ffff);
-}
+    .continue-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+      transition: all 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
 
-.continue-btn:active {
-    transform: translateY(-1px);
-}
+    .continue-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .continue-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+      background: linear-gradient(45deg, #5cb3cc, #4a90e2);
+    }
+
+    .continue-btn:active:not(:disabled) {
+      transform: translateY(-1px);
+    }
+    
+
 
 #feedback {
     margin-top: 25px;

@@ -37,7 +37,7 @@ startTimer((formatted) => {
 
 window.verificarRespostas = function () {
     let erros = 0;
-
+    const continueBtn = document.getElementById("continueBtn");
     for (let key in respostasDesafio1) {
         const input = document.getElementById(key);
         const userAnswer = input.value.trim().toLowerCase();
@@ -54,7 +54,7 @@ window.verificarRespostas = function () {
         const jogadas = localStorage.getItem("move1") || "0";
         const tempoTotalSegundos = startSeconds + elapsedSeconds;
         const tempoTotalFormatado = formatSecondsToTime(tempoTotalSegundos);
-
+        continueBtn.disabled = true;
         localStorage.setItem("tempo1", tempoTotalFormatado); // ✅ Salva o tempo final
         localStorage.setItem("mapa", 2); // Avança para o próximo nível
 

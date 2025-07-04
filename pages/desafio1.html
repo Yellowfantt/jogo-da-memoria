@@ -17,16 +17,16 @@
   <header class="header">
     <div class="header-left">
       <a href="index.html" class="home-btn">
-        <img src="../assets/imagens/home-button.png" alt="Home" class="header-icon">
+        <img src="../assets/imagens/home-button.png" loading="lazy" alt="Home" class="header-icon">
       </a>
     </div>
     <div class="header-right">
       <div class="header-item">
-        <img src="../assets/imagens/single-player.png" alt="Player" class="header-icon">
+        <img src="../assets/imagens/single-player.png" loading="lazy" alt="Player" class="header-icon">
         <strong>Jogador:</strong> <span id="playerName">Player</span>
       </div>
       <div class="header-item">
-        <img src="../assets/imagens/clock.png" alt="Tempo" class="header-icon">
+        <img src="../assets/imagens/clock.png" alt="Tempo" loading="lazy" class="header-icon">
         <strong>Tempo:</strong> <span id="time">00:00</span>
       </div>
     </div>
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <button class="continue-btn" onclick="verificarRespostas()">Continuar</button>
+      <button  id="continueBtn" class="continue-btn" onclick="verificarRespostas()">Continuar</button>
       <div id="feedback"></div>
     </section>
   </main>

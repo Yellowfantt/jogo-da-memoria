@@ -1,5 +1,6 @@
  import { parseTimeToSeconds, formatSecondsToTime } from '../models/utils.js';
  document.getElementById("continueBtn").addEventListener("click", verificarResposta);
+ 
  const questoesPadrao = {
     2: {
       code: `if 20 > 2:\n    print("maior")\nelse:\n    print("menor")`,
@@ -135,3 +136,5 @@
       this.style.transform = 'scale(1)';
     }, 200);
   });
+
+  window.voltarHome = voltarHome;

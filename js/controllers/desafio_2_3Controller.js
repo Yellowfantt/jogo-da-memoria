@@ -8,7 +8,7 @@
     },
     3: {
       code: `x = 10\ny = 20\nif x < y:\n    return "false" \nelse:\n    return "true" `,
-      expected: "true"
+      expected: "false"
     }
   };
 
